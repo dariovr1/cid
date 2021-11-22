@@ -1,24 +1,19 @@
 import logo from './logo.svg';
 import './App.css';
+import { StyledEngineProvider } from '@mui/material/styles';
+import CustomTableUI from './Components/CustomTableUI';
+import { store } from './Store/Index';
+import { Provider } from 'react-redux';
+import TableUI from './Components/TableUI';
+import FilterButton from './Components/Buttons/FilterButton';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <FilterButton />
+      <TableUI />
+    </Provider>
   );
 }
 
