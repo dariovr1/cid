@@ -1,6 +1,7 @@
 import { Fragment, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import TableComponent from './TableComponent';
+import LineChart from './Charts/LineChart';
 
 const TableUI = () => {
 
@@ -11,6 +12,7 @@ const TableUI = () => {
   return (
     <Fragment>
         <TableComponent rows={rows} />
+        <LineChart />
     </Fragment>
   );
 
