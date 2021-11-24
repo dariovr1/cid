@@ -7,6 +7,10 @@ import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
+import Checkbox from '@mui/material/Checkbox';
+import ListItemText from '@mui/material/ListItemText';
+import CancelRoundedIcon from "@material-ui/icons/CancelRounded";
+
 
 
 const ITEM_HEIGHT = 48;
@@ -65,15 +69,16 @@ const SelectChip = () => {
                 renderValue={(selected) => (
                     <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
                     {selected.map((value) => (
-                        <Chip key={value} label={value} />
+                        <Chip key={value} label={value} onDelete={() => {}} />
                     ))}
                     </Box>
                 )}
                 MenuProps={MenuProps}
                 >
                 {names.map((name) => (
-                    <MenuItem key={name} value={name} style={getStyles(name, personName, theme)}>
-                    {name}
+                    <MenuItem key={name} value={name}>
+                        <Checkbox checked={personName.indexOf(name) > -1} />
+                        <ListItemText primary={name} />
                     </MenuItem>
                 ))}
                 </Select>

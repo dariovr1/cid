@@ -35,12 +35,10 @@ const FilterButton = () => {
                         <Paper>
                             <div style={{padding: '20px'}}>
                                 <SelectChip sx={{width: '100%'}} />
-                                <div style={{display: 'flex'}}>
                                     <div style={{display: 'flex', gap: "50px", marginTop: '20px',  flexWrap: 'wrap' }}>
                                         <DateTimePickerComponent name="Date From" label="Date From" />
                                         <DateTimePickerComponent name="Date To" label="Date To" />
                                     </div>
-                                </div>
                                 <div style={{display: 'flex', marginTop: "30px", gap: '50px', justifyContent : 'flex-end'}}>
                                      <SaveButton />
                                      <ClearButton />
