@@ -7,6 +7,11 @@ import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import { searchByWord } from '../../Slice/SearchSlice';
 import { useDispatch } from 'react-redux';
+import SelectChip from '../Form/SelectChip';
+import DateTimePickerComponent from '../Form/DateTimePickerComponent';
+import SaveButton from "../Buttons/SaveButton";
+import ClearButton from "../Buttons/ClearButton";
+
 
 const FilterButton = () => {
 
@@ -29,7 +34,17 @@ const FilterButton = () => {
                     <Fade {...TransitionProps} timeout={350}>
                         <Paper>
                             <div style={{padding: '20px'}}>
-                                <TextField helperText=" " id="demo-helper-text-aligned-no-helper" label="Name" onChange={handleSearchName} />
+                                <SelectChip sx={{width: '100%'}} />
+                                <div style={{display: 'flex'}}>
+                                    <div style={{display: 'flex', gap: "50px", marginTop: '20px',  flexWrap: 'wrap' }}>
+                                        <DateTimePickerComponent name="Date From" label="Date From" />
+                                        <DateTimePickerComponent name="Date To" label="Date To" />
+                                    </div>
+                                </div>
+                                <div style={{display: 'flex', marginTop: "30px", gap: '50px', justifyContent : 'flex-end'}}>
+                                     <SaveButton />
+                                     <ClearButton />
+                                </div>
                             </div>
                         </Paper>
                     </Fade>

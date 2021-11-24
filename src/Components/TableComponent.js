@@ -5,10 +5,15 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import DoneButton from './Buttons/DoneButton';
-import FailButton from './Buttons/FailButton';
 import ArrowRight from '@material-ui/icons/ArrowRight';
 import DeleteButton from './Buttons/DeleteButton';
+import {
+  convertDateTo
+}  from '../Utils/Index';
+
+import {
+  objStatus
+} from './Buttons/Index';
 
 const TableComponent = ({rows}) => {
     return (
@@ -37,9 +42,9 @@ const TableComponent = ({rows}) => {
               <TableCell component="th" scope="row">
                 {row.name}
               </TableCell>
-              <TableCell align="right">{(row.status) ? <DoneButton /> : <FailButton />}</TableCell>
-              <TableCell align="right">{row.start}</TableCell>
-              <TableCell align="right">{row.finish}</TableCell>
+              <TableCell align="right">{row.status && objStatus[row.status]}</TableCell>
+              <TableCell align="right">{convertDateTo(row.start)}</TableCell>
+              <TableCell align="right">{convertDateTo(row.finish)}</TableCell>
               <TableCell align="right">{row.duration + "h"}</TableCell>
               <TableCell align="right">{row.eff}</TableCell>
               <TableCell align="right">{(row.rej) ? row.rej : "N/A"}</TableCell>
