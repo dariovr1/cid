@@ -11,7 +11,7 @@ import SelectChip from '../Form/SelectChip';
 import DateTimePickerComponent from '../Form/DateTimePickerComponent';
 import SaveButton from "../Buttons/SaveButton";
 import ClearButton from "../Buttons/ClearButton";
-
+import FilterListIcon from '@mui/icons-material/FilterList';
 
 const FilterButton = () => {
 
@@ -38,11 +38,11 @@ const FilterButton = () => {
     };
 
     return (
-        <div style={{ display: 'flex', justifyContent : 'flex-end', padding: '20px' }}>
+        <div>
             <PopupState variant="popper" popupId="demo-popup-popper">
             {(popupState) => (
                 <div>
-                <Button variant="contained" {...bindToggle(popupState)}>
+                <Button style={{background: '#004f90'}} variant="contained" {...bindToggle(popupState)} startIcon={<FilterListIcon />}>
                     Filter
                 </Button>
                 <Popper {...bindPopper(popupState)} transition>

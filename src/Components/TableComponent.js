@@ -22,15 +22,15 @@ const TableComponent = ({rows}) => {
         <TableHead>
           <TableRow>
             <TableCell>Name</TableCell>
-            <TableCell align="right">Status</TableCell>
-            <TableCell align="right">Start</TableCell>
-            <TableCell align="right">Stop</TableCell>
-            <TableCell align="right">Duration</TableCell>
-            <TableCell align="right">Efficiency %</TableCell>
-            <TableCell align="right">Reject %</TableCell>
-            <TableCell align="right">Stops</TableCell>
-            <TableCell align="right"></TableCell>
-            <TableCell align="right"></TableCell>
+            <TableCell >Status</TableCell>
+            <TableCell >Start</TableCell>
+            <TableCell >Stop</TableCell>
+            <TableCell >Duration</TableCell>
+            <TableCell >Efficiency %</TableCell>
+            <TableCell >Reject %</TableCell>
+            <TableCell >Stops</TableCell>
+            <TableCell ></TableCell>
+            <TableCell ></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -42,15 +42,14 @@ const TableComponent = ({rows}) => {
               <TableCell component="th" scope="row">
                 {row.name}
               </TableCell>
-              <TableCell align="right">{row.status && objStatus[row.status]}</TableCell>
-              <TableCell align="right">{convertDateTo(row.start)}</TableCell>
-              <TableCell align="right">{convertDateTo(row.finish)}</TableCell>
-              <TableCell align="right">{row.duration + "h"}</TableCell>
-              <TableCell align="right">{row.eff}</TableCell>
-              <TableCell align="right">{(row.rej) ? row.rej : "N/A"}</TableCell>
-              <TableCell align="right">{row.stop}</TableCell>
-              <TableCell align="right">{<a target="_blank" href={row.link}><ArrowRight /></a>}</TableCell>
-              <TableCell align="right">{<DeleteButton uuid={row.id} />}</TableCell>
+              <TableCell >{row.status && objStatus[row.status]}</TableCell>
+              <TableCell >{convertDateTo(row.start)}</TableCell>
+              <TableCell >{convertDateTo(row.finish)}</TableCell>
+              <TableCell >{row.duration + "h"}</TableCell>
+              <TableCell >{row.eff}</TableCell>
+              <TableCell >{(row.rej) ? row.rej : "N/A"}</TableCell>
+              <TableCell >{row.stop}</TableCell>
+              <TableCell >{<DeleteButton uuid={row.id} />}</TableCell>
             </TableRow>
           ))}
         </TableBody>

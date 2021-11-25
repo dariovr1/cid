@@ -4,6 +4,8 @@ import TableComponent from './TableComponent';
 import {
  excludeSelector
 } from '../Selectors/Index';
+import LeakingData from './Buttons/LeakingData';
+import FilterButton from './Buttons/FilterButton';
 
 const TableUI = () => {
 
@@ -15,7 +17,13 @@ const TableUI = () => {
 
   return (
     <Fragment>
-        <TableComponent rows={rows} />
+        <div style={{display: 'flex', flexDirection: 'column'}}>
+          <div style={{display: 'flex', marginBottom: '20px'}}>
+            <LeakingData />
+            <FilterButton />
+          </div>
+          <TableComponent rows={rows} />
+        </div>
     </Fragment>
   );
 
