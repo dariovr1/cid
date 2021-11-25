@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -10,6 +10,8 @@ import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
 import ListItemText from '@mui/material/ListItemText';
 import CancelRoundedIcon from "@material-ui/icons/CancelRounded";
+import { useDispatch, useSelector } from 'react-redux';
+import {setStatus} from '../../Slice/SearchSlice';
 
 
 
@@ -33,16 +35,24 @@ const SelectChip = () => {
       ];
 
       const theme = useTheme();
+      const dispatch = useDispatch();
+      const resultset = useSelector((state) => state.resultset );
       const [personName, setPersonName] = React.useState([]);
+
+      useEffect(() => {
+        resultset.filterparam.status != "" && setPersonName(resultset.filterparam.status);
+        resultset.filterparam.status.length == 0 && setPersonName([]);
+      },[resultset.filterparam.status]);
     
       const handleChange = (event) => {
         const {
           target: { value },
         } = event;
-        setPersonName(
+        dispatch(
+        setStatus(
           // On autofill we get a the stringified value.
           typeof value === 'string' ? value.split(',') : value,
-        );
+        ));
       };
 
     const  getStyles = (name, personName, theme) => {

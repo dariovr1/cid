@@ -7,7 +7,9 @@ import {
 
 const TableUI = () => {
 
-  const rows = useSelector((state) => (excludeSelector(state.foo,'progress')));
+  const rows = useSelector((state) => (excludeSelector(
+    (state.resultset.filtered.length > 0) ? state.resultset.filtered 
+    : state.resultset.default ,'progress')));
   const dispatch = useDispatch();
 
 

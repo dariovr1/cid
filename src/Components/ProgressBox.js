@@ -16,19 +16,29 @@ import {
 
 const ProgressBox = (props) => {
 
-    const rows = useSelector((state) => (includeSelector(state.foo,'progress')));
+    const rows = useSelector((state) => (includeSelector(state.resultset.default,'progress')));
     console.log("rows progress is ", rows);
 
     return(
         <Card sx={{ width: '100%' }}>
+        <div style={{ width: '100%', height: '10px', backgroundColor: '#fed702' }}>
+        </div>
         <CardContent>
             {rows.map((item) => (
-                <Box sx={{ display: 'flex' }}>
-                    <Box sx={{ display: 'flex' , flexDirection: "column", marginRight : 'auto' }}>
+                <Box sx={{ display: 'flex', gap : '100px' }}>
+                    <Box sx={{ display: 'flex' , flexDirection: "column" }}>
                         <Typography variant="h6">{item.name}</Typography>
-                        <Typography variant="h8" fontSize="14px" marginBottom="10px">{convertDateTo(item.start)}</Typography>
+                        <Typography variant="h8" fontSize="15px" marginBottom="5px">{item.fakeDate}</Typography>
                         <ProgressButton />
                     </Box>
+                    <div style={{display : 'flex', flexDirection : 'column'}}>
+                        <span style={{marginTop : '10px'}}>Duration</span>
+                        <span style={{marginTop : '10px'}}>41m</span>
+                    </div>
+                    <div style={{display : 'flex',  flexDirection : 'column'}}>
+                    <span style={{marginTop : '10px'}}>Current Step</span>
+                    <span style={{marginTop : '10px'}}>Data Acquisition</span>
+                </div>
                 </Box>
             ))}
         </CardContent>

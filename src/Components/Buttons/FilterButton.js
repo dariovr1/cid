@@ -5,7 +5,7 @@ import PopupState, { bindToggle, bindPopper } from 'material-ui-popup-state';
 import Fade from '@mui/material/Fade';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
-import { searchByWord } from '../../Slice/SearchSlice';
+import { setFilterDate, executeSearchFilter, clearFilter } from '../../Slice/SearchSlice';
 import { useDispatch } from 'react-redux';
 import SelectChip from '../Form/SelectChip';
 import DateTimePickerComponent from '../Form/DateTimePickerComponent';
@@ -17,9 +17,25 @@ const FilterButton = () => {
 
     const dispatch = useDispatch();
 
-    const handleSearchName = (e) => {
-       (e.target.value.length > 3) && dispatch(searchByWord(e.target.value));
+    const handleChange = (key,value) => {
+            console.log("handleChange Datapicker", {
+                key,
+                value
+            });
+
+            dispatch(setFilterDate({key,value}));
+
     }
+
+
+    const handleClearClick = () => {
+        dispatch(clearFilter());
+    }
+
+    const handleClick = () => {
+        console.log("handleClick");
+        dispatch(executeSearchFilter());
+    };
 
     return (
         <div style={{ display: 'flex', justifyContent : 'flex-end', padding: '20px' }}>
@@ -36,12 +52,12 @@ const FilterButton = () => {
                             <div style={{padding: '20px'}}>
                                 <SelectChip sx={{width: '100%'}} />
                                     <div style={{display: 'flex', gap: "50px", marginTop: '20px',  flexWrap: 'wrap' }}>
-                                        <DateTimePickerComponent name="Date From" label="Date From" />
-                                        <DateTimePickerComponent name="Date To" label="Date To" />
+                                        <DateTimePickerComponent name="Date From" filtername="startDate" label="Date From" handleChange={handleChange}  />
+                                        <DateTimePickerComponent name="Date To" filtername="endDate" label="Date To" handleChange={handleChange} />
                                     </div>
                                 <div style={{display: 'flex', marginTop: "30px", gap: '50px', justifyContent : 'flex-end'}}>
-                                     <SaveButton />
-                                     <ClearButton />
+                                     <SaveButton handleClick={handleClick} />
+                                     <ClearButton handleClick={handleClearClick} />
                                 </div>
                             </div>
                         </Paper>

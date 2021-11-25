@@ -1,96 +1,26 @@
 import { createSlice,current } from '@reduxjs/toolkit';
+import {mockData} from "../Data/index";
 
-const initialState = [
-  {
-    id : 994,
-    name : "test Dario",
-    status: 'done',
-    start : 1637316000000,
-    finish : 1637323200000,
-    duration : 1,
-    eff: 0.00,
-    rej : false,
-    stop : "0.50",
-    link : "http://www.google.com", 
-},
-{
-  id : 705,
-  name : "test foo",
-  status: 'done',
-  start : 1637920800000,
-  finish : 1638093600000,
-  duration : 3,
-  eff: 36.61,
-  rej : 27.03,
-  stop : "0.75",
-  link : "http://www.google.com" 
-},
-{
-  id : 104,
-  name: 'test bar', 
-  status: 'done',
-  start : 1629939600000,
-  finish : 1630292400000,
-  duration : 2,
-  eff: 75.81,
-  rej : 11.03,
-  stop : "0.10",
-  link : "http://www.google.com"
-},
-{
-  id : 4791,
-  name: 'test progress', 
-  status: 'progress',
-  start : 1630476000000,
-  finish : 1630656000000,
-  duration : 8,
-  eff: 67.81,
-  rej : 10.03,
-  stop : "0.10",
-  link : "http://www.google.com"
-},
-{
-  id : 8671,
-  name: 'test progress 2', 
-  status: 'progress',
-  start : 1599026400000,
-  finish : 1599717600000,
-  duration : 6,
-  eff: 75.81,
-  rej : 11.03,
-  stop : "0.10",
-  link : "http://www.google.com"
-},
-{
-  id : 5197,
-  name: 'test progress 3', 
-  status: 'progress',
-  start : 1638350400000,
-  finish : 1638436860000,
-  duration : 6,
-  eff: 75.81,
-  rej : 11.03,
-  stop : "0.10",
-  link : "http://www.google.com"
-},
-{  
-  id : 278,
-  name: 'test baz', 
-  status: 'fail',
-  start : 1634338800,
-  finish : 1634450400,
-  duration : 3,
-  eff: 25.09,
-  rej : false,
-  stop : "0.05",
-  link : "http://www.google.com"
-}
-]
+const initialState = {
+  default : mockData,
+  filtered : [],
+  filterparam : {
+    status : [],
+    startDate : null,
+    endDate : null,
+    active : false
+  }
+};
 
 export const SearchSlice = createSlice({
   name: 'search',
   initialState,
   reducers: {
+    setStatus : (state, action) => {
+      console.log("setStatusReducer", current(state));
+      state.filterparam.status = action.payload;
+      return state;
+    },
     deleteItem : (state, action) => {
       console.log("deleteItem", current(state));
       return current(state).filter(item => {
@@ -99,19 +29,54 @@ export const SearchSlice = createSlice({
          }
       });
     },
-    searchByWord: (state, action) => {
-      console.log("searchWord", current(state));
-      const matchFilter = current(state).filter(item => {
-         return item.name.includes(action.payload);
-      });
-      console.log("match is ", matchFilter);
-      return matchFilter;
-     // console.log("hi from searchByWord ", action.payload);
+    clearFilter: (state, action) => {
+      console.log("clearFilter execute");
+      state.filtered = [];
+      state.filterparam.status = [];
+     return state;
+    },
+    setFilterDate: (state, action) => {
+      console.log("setFilterDate ", current(state));
+     console.log("setFilterDate payload", action.payload);
+     state.filterparam[action.payload.key] = action.payload.value;
+     return state;
+    },
+    executeSearchFilter : (state, action) => {
+      console.log("executeFilter ", current(state));
+      const params = current(state).filterparam;
+
+      if (params.status.length > 0) {
+        state.filtered = current(state).default.filter((item) => {
+         return params.status.includes(item.status);
+        });
+      }
+
+      if (params.startDate || params.endDate ) {
+          if (state.filtered.length > 0) {
+              state.filtered = current(state).filtered.filter((item) => {
+                console.log("name element ", item.name);
+                console.log("check dateFilter ", item.start >= parseInt(params.startDate)  && parseInt(params.endDate) <= item.finish);
+                if ( item.start >= parseInt(params.startDate)  && parseInt(params.endDate) <= item.finish ) {
+                  return true;
+                }
+              });
+          }else {
+            state.filtered = current(state).default.filter((item) => {
+              console.log("name element ", item.name);
+                console.log("check dateFilter ", item.start >= parseInt(params.startDate)  && parseInt(params.endDate) <= item.finish);
+                if ( item.start >= parseInt(params.startDate)  && parseInt(params.endDate) <= item.finish ) {
+                  return true;
+                }
+           });
+          }
+      }
+
+      return state;
     },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { searchByWord,deleteItem } = SearchSlice.actions;
+export const { setFilterDate,deleteItem,setStatus, executeSearchFilter, clearFilter } = SearchSlice.actions;
 
 export default SearchSlice.reducer;
