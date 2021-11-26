@@ -5,7 +5,7 @@ import TableUI from '../Components/TableUI';
 const TableContainerContainer = (props) => {
     return (
        <div style={{display: 'flex', padding: '20px', gap: '40px'}}>
-          <div class="ContainerSidebar" style={{ width: '180px', flexDirection: 'column'}}>
+          <div class="ContainerSidebar" style={{ width: '220px', flexDirection: 'column'}}>
             <div>
                 <h2>LU44 Maker</h2>
             </div>

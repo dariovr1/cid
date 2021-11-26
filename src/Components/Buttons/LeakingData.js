@@ -6,7 +6,7 @@ import ShowChartIcon from '@mui/icons-material/ShowChart';
 const LeakingData = () => {
     return (
     <Button style={{background: '#004f90', color: 'white', marginRight: 'auto'}} startIcon={<ShowChartIcon />}>
-    SHOW LEADKAGE <br/> DATA
+    SHOW LEAKAGE <br/> DATA
     </Button>)
 };
 

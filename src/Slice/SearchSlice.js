@@ -55,18 +55,18 @@ export const SearchSlice = createSlice({
           if (state.filtered.length > 0) {
               state.filtered = current(state).filtered.filter((item) => {
                 console.log("name element ", item.name);
-                console.log("check dateFilter ", item.start >= parseInt(params.startDate)  && parseInt(params.endDate) <= item.finish);
-                if ( item.start >= parseInt(params.startDate)  && parseInt(params.endDate) <= item.finish ) {
+                console.log("check dateFilter ", item.epstart >= parseInt(params.startDate)  && parseInt(params.endDate) >= item.epfinish);
+                if ( item.epstart >= parseInt(params.startDate)  && parseInt(params.endDate) >= item.epfinish ) {
                   return true;
                 }
               });
           }else {
             state.filtered = current(state).default.filter((item) => {
               console.log("name element ", item.name);
-                console.log("check dateFilter ", item.start >= parseInt(params.startDate)  && parseInt(params.endDate) <= item.finish);
-                if ( item.start >= parseInt(params.startDate)  && parseInt(params.endDate) <= item.finish ) {
-                  return true;
-                }
+              console.log("check dateFilter ", item.epstart >= parseInt(params.startDate)  && parseInt(params.endDate) >= item.epfinish);
+              if ( item.epstart >= parseInt(params.startDate)  && parseInt(params.endDate) >= item.epfinish ) {
+                return true;
+              }
            });
           }
       }
