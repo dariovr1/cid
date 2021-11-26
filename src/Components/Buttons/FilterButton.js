@@ -12,7 +12,9 @@ import DateTimePickerComponent from '../Form/DateTimePickerComponent';
 import SaveButton from "../Buttons/SaveButton";
 import ClearButton from "../Buttons/ClearButton";
 import FilterListIcon from '@mui/icons-material/FilterList';
+import DatePickerModal from '../Modal/DatePickerModal';
 
+  
 const FilterButton = () => {
 
     const dispatch = useDispatch();
@@ -52,8 +54,8 @@ const FilterButton = () => {
                             <div style={{padding: '20px'}}>
                                 <SelectChip sx={{width: '100%'}} />
                                     <div style={{display: 'flex', gap: "50px", marginTop: '20px',  flexWrap: 'wrap' }}>
-                                        <DateTimePickerComponent name="Date From" filtername="startDate" label="Date From" handleChange={handleChange}  />
-                                        <DateTimePickerComponent name="Date To" filtername="endDate" label="Date To" handleChange={handleChange} />
+                                        <DatePickerModal label="Date From" filtername="startDate" handleChange={handleChange} />
+                                        <DatePickerModal label="Date To" filtername="endDate" handleChange={handleChange} />
                                     </div>
                                 <div style={{display: 'flex', marginTop: "30px", gap: '50px', justifyContent : 'flex-end'}}>
                                      <SaveButton handleClick={handleClick} />
