@@ -18,7 +18,7 @@ const TableUI = () => {
   return (
     <Fragment>
         <div style={{display: 'flex', flexDirection: 'column'}}>
-          <div style={{display: 'flex', marginBottom: '20px'}}>
+          <div style={{display: 'flex', marginBottom: '20px', justifyContent : 'space-between'}}>
             <LeakingData />
             <FilterButton />
           </div>
