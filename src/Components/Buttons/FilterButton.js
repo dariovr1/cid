@@ -13,9 +13,10 @@ import SaveButton from "../Buttons/SaveButton";
 import ClearButton from "../Buttons/ClearButton";
 import FilterListIcon from '@mui/icons-material/FilterList';
 import DatePickerModal from '../Modal/DatePickerModal';
+import {mockData} from '../../Data/index';
 
   
-const FilterButton = () => {
+const FilterButton = ({chips,datafilter}) => {
 
     const dispatch = useDispatch();
 
@@ -35,8 +36,9 @@ const FilterButton = () => {
     }
 
     const handleClick = () => {
+        const res = (datafilter) ? datafilter : mockData;
         console.log("handleClick");
-        dispatch(executeSearchFilter());
+        dispatch(executeSearchFilter(res));
     };
 
     return (
@@ -52,7 +54,7 @@ const FilterButton = () => {
                     <Fade {...TransitionProps} timeout={350}>
                         <Paper>
                             <div style={{padding: '20px'}}>
-                                <SelectChip sx={{width: '100%'}} />
+                                <SelectChip items={chips} sx={{width: '100%'}} /> 
                                     <div style={{display: 'flex', gap: "50px", marginTop: '20px',  flexWrap: 'wrap' }}>
                                         <DatePickerModal label="Date From" filtername="startDate" handleChange={handleChange} />
                                         <DatePickerModal label="Date To" filtername="endDate" handleChange={handleChange} />

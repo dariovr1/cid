@@ -1,3 +1,89 @@
+import moment from 'moment';
+
+
+const currentdate = parseInt(moment().format("HH"));
+
+const todayDate = moment().format("MMM D, YYYY").toString();
+
+const leakageTableData = [{
+  startDate : '17/11/2021 00:00:00',
+  endDate : '17/11/2021 18:00:00',
+  epstart : 1637107200000,
+  epfinish : 1637172000000,
+  type : 2,
+  rownumber: 4,
+  severity : 2,
+  valveno :8,
+  alert : 1,
+ },
+ {
+  startDate : '10/11/2021 00:00:00',
+  endDate : '10/11/2021 19:00:00',
+  epstart : 1636502400000,
+  epfinish : 1636570800000,
+  type : 2,
+  rownumber: 1,
+  severity : 2,
+  valveno :21,
+  alert : 1,
+ },
+ {
+  startDate : '30/10/2021 00:00:00',
+  endDate : '30/10/2021 23:00:00',
+  epstart : 1638230400000,
+  epfinish : 1636570800000,
+  type : 5,
+  rownumber: 16,
+  severity : 30.1,
+  valveno :1.645,
+  alert : '',
+ },
+ {
+  startDate : '20/10/2021 00:00:00',
+  endDate : '20/10/2021 22:00:00',
+  epstart : 1634688000000,
+  epfinish : 1634767200000,
+  type : 5,
+  rownumber: 16,
+  severity : 30.1,
+  valveno :1.645,
+  alert : '',
+ },
+ {
+  startDate : '10/10/2021 00:00:00',
+  endDate : '10/10/2021 18:00:00',
+  epstart : 1633824000000,
+  epfinish : 1633888800000,
+  type : 5,
+  rownumber: 16,
+  severity : 30.1,
+  valveno :1.634,
+  alert : 1,
+ },
+ {
+  startDate : '01/09/2021 00:00:00',
+  endDate : '01/09/2021 15:00:00',
+  epstart : 1633824000000,
+  epfinish : 1633888800000,
+  type : 5,
+  rownumber: 16,
+  severity : 30.1,
+  valveno :1.634,
+  alert : 1,
+ },
+ {
+  startDate : '01/07/2021 00:00:00',
+  endDate : '01/07/2021 19:00:00',
+  epstart : 1625097600000,
+  epfinish : 1626652800000,
+  type : 5,
+  rownumber: 16,
+  severity : 30.1,
+  valveno :1.638,
+  alert : '',
+ }];
+
+
 const mockData = [
     {
       id : 4791,
@@ -146,113 +232,99 @@ const mockData = [
 
 
   const basicData = [
-    {x: 1638230400000, y: 9.8},
-    {x: 1638237600000, y: 9.8},
-    {x: 1638244800000, y: 9.8},
-    {x: 1638252000000, y: 9.8},
-    {x: 1638259200000, y: 9.8},
-    {x: 1638266400000, y: 9.8},
-    {x: 1638273600000, y: 9.8},
-    {x: 1638280800000, y: 9.8},
-    {x: 1638288000000, y: 9.7},
-    {x: 1638295200000, y: 9.7},
-    {x: 1638302400000, y: 9.7},
-    {x: 1638309600000, y: 9.7}
+    {x: 0, y: 9.8},
+    {x: 2, y: 9.8},
+    {x: 4, y: 9.8},
+    {x: 6, y: 9.8},
+    {x: 8, y: 9.8},
+    {x: 10, y: 9.8},
+    {x: 12, y: 9.8},
+    {x: 14, y: 9.8},
+    {x: 16, y: 9.7},
+    {x: 18, y: 9.7},
+    {x: 20, y: 9.7},
+    {x: 22, y: 9.7}
   ];
 
   const basicDatatwo = [
-    {x: 1638230400000, y: 10.2},
-    {x: 1638237600000, y: 10.2},
-    {x: 1638244800000, y: 10.2},
-    {x: 1638252000000, y: 10.2},
-    {x: 1638259200000, y: 10.2},
-    {x: 1638266400000, y: 10.2},
-    {x: 1638273600000, y: 10.2},
-    {x: 1638280800000, y: 10.2},
-    {x: 1638288000000, y: 10.1},
-    {x: 1638295200000, y: 10.1},
-    {x: 1638302400000, y: 10.1},
-    {x: 1638309600000, y: 10.2}
+    {x: 0, y: 10.2},
+    {x: 2, y: 10.2},
+    {x: 4, y: 10.2},
+    {x: 6, y: 10.2},
+    {x: 8, y: 10.2},
+    {x: 10, y: 10.2},
+    {x: 12, y: 10.2},
+    {x: 14, y: 10.2},
+    {x: 16, y: 10.1},
+    {x: 18, y: 10.1},
+    {x: 20, y: 10.1},
+    {x: 22, y: 10.2}
   ];
 
   const basicDatatre = [
-    {x: 1638230400000, y: 10.8},
-    {x: 1638237600000, y: 10.8},
-    {x: 1638244800000, y: 10.8},
-    {x: 1638252000000, y: 10.8},
-    {x: 1638259200000, y: 10.8},
-    {x: 1638266400000, y: 10.8},
-    {x: 1638273600000, y: 10.8},
-    {x: 1638280800000, y: 10.8},
-    {x: 1638288000000, y: 10.7},
-    {x: 1638295200000, y: 10.7},
-    {x: 1638302400000, y: 10.7},
-    {x: 1638309600000, y: 10.8}
+    {x: 0, y: 10.8},
+    {x: 2, y: 10.8},
+    {x: 4, y: 10.8},
+    {x: 6, y: 10.8},
+    {x: 8, y: 10.8},
+    {x: 10, y: 10.8},
+    {x: 12, y: 10.8},
+    {x: 14, y: 10.8},
+    {x: 16, y: 10.7},
+    {x: 18, y: 10.7},
+    {x: 20, y: 10.7},
+    {x: 22, y: 10.8}
   ];
 
+  const tickset = [0,2,4,6,8,10,12,2,4,6,8,10,12,14,16,18,20,22];
+
   const basicDataquattro = [
-    {x: 1638230400000, y: 10.5},
-    {x: 1638237600000, y: 10.5},
-    {x: 1638244800000, y: 10.5},
-    {x: 1638252000000, y: 10.5},
-    {x: 1638259200000, y: 10.5},
-    {x: 1638266400000, y: 10.5},
-    {x: 1638273600000, y: 10.5},
-    {x: 1638280800000, y: 10.5},
-    {x: 1638288000000, y: 10.5},
-    {x: 1638295200000, y: 10.4},
-    {x: 1638302400000, y: 10.4},
-    {x: 1638309600000, y: 10.4}
+    {x: 0, y: 10.5},
+    {x: 2, y: 10.5},
+    {x: 4, y: 10.5},
+    {x: 6, y: 10.5},
+    {x: 8, y: 10.5},
+    {x: 10, y: 10.5},
+    {x: 12, y: 10.5},
+    {x: 14, y: 10.5},
+    {x: 16, y: 10.5},
+    {x: 18, y: 10.4},
+    {x: 20, y: 10.4},
+    {x: 22, y: 10.4}
   ];
+
+  const getBasicData = () => {
+    console.log("getBasciData ", basicData.filter(item => {
+      return currentdate >= item.x;
+    }));
+    return basicData.filter(item => currentdate >= item.x);
+  }
+
+  const getDatatwo = () => {
+    return basicDatatwo.filter(item => currentdate >= item.x);
+  }
+
+  const getDatatre = () => {
+    return basicDatatre.filter(item => currentdate >= item.x);
+  }
+
+  const getDataquattro = () => {
+    return basicDataquattro.filter(item => currentdate >= item.x);
+  }
+
+  const getTickSet = () => {
+    return tickset.filter(item => currentdate >= item.x);
+  }
 
 
   export {
       mockData,
-      basicData,
-      basicDatatwo,
-      basicDatatre,
-      basicDataquattro
+      getBasicData,
+      getDatatwo,
+      getDatatre,
+      getDataquattro,
+      getTickSet,
+      todayDate,
+      leakageTableData
   }
 
-
-
-
-
-  /*
-  {
-    id : 4791,
-    name: 'test progress', 
-    status: 'progress',
-    start : 1630476000000,
-    finish : 1630656000000,
-    duration : 8,
-    eff: 67.81,
-    rej : 10.03,
-    stop : "0.10",
-    link : "http://www.google.com"
-  },
-  {
-    id : 8671,
-    name: 'test progress 2', 
-    status: 'progress',
-    start : 1599026400000,
-    finish : 1599717600000,
-    duration : 6,
-    eff: 75.81,
-    rej : 11.03,
-    stop : "0.10",
-    link : "http://www.google.com"
-  },
-  {
-    id : 5197,
-    name: 'test progress 3', 
-    status: 'progress',
-    start : 1638350400000,
-    finish : 1638436860000,
-    duration : 6,
-    eff: 75.81,
-    rej : 11.03,
-    stop : "0.10",
-    link : "http://www.google.com"
-  },
-  */

@@ -26,13 +26,8 @@ const MenuProps = {
   },
 };
 
-const SelectChip = () => {
+const SelectChip = ({items = ['done', 'progress', 'fail']}) => {
 
-    const names = [
-        'done',
-        'progress',
-        'fail',
-      ];
 
       const theme = useTheme();
       const dispatch = useDispatch();
@@ -85,7 +80,7 @@ const SelectChip = () => {
                 )}
                 MenuProps={MenuProps}
                 >
-                {names.map((name) => (
+                {items.map((name) => (
                     <MenuItem key={name} value={name}>
                         <Checkbox checked={personName.indexOf(name) > -1} />
                         <ListItemText primary={name} />
