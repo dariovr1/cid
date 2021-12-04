@@ -28,6 +28,7 @@ const LineChart = (props) => {
       return ["Avg_Reject","AvgRjct1","MaxFlt#1","MaxRjct1","STDvR1"];
     });
 
+    const leakageData = useSelector((state) => (state.resultset.filtered.length > 0) ? state.resultset.filtered : leakageTableData);
     const filterDate = useSelector((state) => state.resultset.filterparam.startDate);
 
     useEffect(() => {
@@ -56,7 +57,7 @@ const LineChart = (props) => {
         <FilterButton datafilter={leakageTableData} chips={["Avg_Reject","AvgRjct1","MaxFlt#1","MaxRjct1","STDvR1"]} />
       </div>
       <div style={{ backgroundColor : 'white' }}>
-        <TableComponent  rows={leakageTableData} tablerow={['startDate','endDate','type', 'rownumber', 'severity', 'valveno', 'alert' ]} />
+        <TableComponent  rows={leakageData} tablerow={['startDate','endDate','type', 'rownumber', 'severity', 'valveno', 'alert' ]} />
           <VictoryChart width={1120} height={400} theme={VictoryTheme.material} domainPadding={10}>
           <VictoryLegend x={0} y={10}
           orientation="horizontal"

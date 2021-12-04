@@ -8,8 +8,8 @@ const todayDate = moment().format("MMM D, YYYY").toString();
 const leakageTableData = [{
   startDate : '17/11/2021 00:00:00',
   endDate : '17/11/2021 18:00:00',
-  epstart : 1637107200000,
-  epfinish : 1637172000000,
+  epstart : 16371072000,
+  epfinish : 1637172000,
   type : 2,
   rownumber: 4,
   severity : 2,
@@ -19,8 +19,8 @@ const leakageTableData = [{
  {
   startDate : '10/11/2021 00:00:00',
   endDate : '10/11/2021 19:00:00',
-  epstart : 1636502400000,
-  epfinish : 1636570800000,
+  epstart : 16365024000,
+  epfinish : 1636570800,
   type : 2,
   rownumber: 1,
   severity : 2,
@@ -30,8 +30,8 @@ const leakageTableData = [{
  {
   startDate : '30/10/2021 00:00:00',
   endDate : '30/10/2021 23:00:00',
-  epstart : 1638230400000,
-  epfinish : 1636570800000,
+  epstart : 16382304000,
+  epfinish : 1636570800,
   type : 5,
   rownumber: 16,
   severity : 30.1,
@@ -41,8 +41,8 @@ const leakageTableData = [{
  {
   startDate : '20/10/2021 00:00:00',
   endDate : '20/10/2021 22:00:00',
-  epstart : 1634688000000,
-  epfinish : 1634767200000,
+  epstart : 16346880000,
+  epfinish : 1634767200,
   type : 5,
   rownumber: 16,
   severity : 30.1,
@@ -52,8 +52,8 @@ const leakageTableData = [{
  {
   startDate : '10/10/2021 00:00:00',
   endDate : '10/10/2021 18:00:00',
-  epstart : 1633824000000,
-  epfinish : 1633888800000,
+  epstart : 1633824000,
+  epfinish : 1633888800,
   type : 5,
   rownumber: 16,
   severity : 30.1,
@@ -63,8 +63,8 @@ const leakageTableData = [{
  {
   startDate : '01/09/2021 00:00:00',
   endDate : '01/09/2021 15:00:00',
-  epstart : 1633824000000,
-  epfinish : 1633888800000,
+  epstart : 1630454400,
+  epfinish : 1630508400,
   type : 5,
   rownumber: 16,
   severity : 30.1,
@@ -74,8 +74,8 @@ const leakageTableData = [{
  {
   startDate : '01/07/2021 00:00:00',
   endDate : '01/07/2021 19:00:00',
-  epstart : 1625097600000,
-  epfinish : 1626652800000,
+  epstart : 1625097600,
+  epfinish : 1625166000,
   type : 5,
   rownumber: 16,
   severity : 30.1,
@@ -313,7 +313,9 @@ const mockData = [
   }
 
   const getTickSet = () => {
-    return tickset.filter(item => currentdate >= item.x);
+    return tickset.filter(item => {
+      return currentdate >= item;
+    });
   }
 
 

@@ -41,19 +41,19 @@ export const SearchSlice = createSlice({
      state.filterparam[action.payload.key] = action.payload.value;
      return state;
     },
-    executeSearchFilter : (state, action) => {
+    executeSearchFilter : (state, {payload}) => {
       console.log("executeFilter ", current(state));
       const params = current(state).filterparam;
 
       if (params.status.length > 0) {
-        state.filtered = current(state).default.filter((item) => {
+        state.filtered = payload.filter((item) => {
          return params.status.includes(item.status);
         });
       }
 
       if (params.startDate || params.endDate ) {
           if (state.filtered.length > 0) {
-              state.filtered = current(state).filtered.filter((item) => {
+              state.filtered = payload.filter((item) => {
                 console.log("name element ", item.name);
                 console.log("check dateFilter ", item.epstart >= parseInt(params.startDate)  && parseInt(params.endDate) >= item.epfinish);
                 if ( item.epstart >= parseInt(params.startDate)  && parseInt(params.endDate) >= item.epfinish ) {
@@ -61,7 +61,7 @@ export const SearchSlice = createSlice({
                 }
               });
           }else {
-            state.filtered = current(state).default.filter((item) => {
+            state.filtered = payload.filter((item) => {
               console.log("name element ", item.name);
               console.log("check dateFilter ", item.epstart >= parseInt(params.startDate)  && parseInt(params.endDate) >= item.epfinish);
               if ( item.epstart >= parseInt(params.startDate)  && parseInt(params.endDate) >= item.epfinish ) {
