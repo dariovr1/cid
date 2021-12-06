@@ -22,12 +22,9 @@ export const SearchSlice = createSlice({
       return state;
     },
     deleteItem : (state, action) => {
-      console.log("deleteItem", current(state));
-      return current(state).filter(item => {
-         if (item.id != action.payload) {
-           return true;
-         }
-      });
+      console.log("deleteItem", current(state).default);
+      state.default = current(state).default.filter(item => (item.id != action.payload));
+      return state;
     },
     clearFilter: (state, action) => {
       console.log("clearFilter execute");

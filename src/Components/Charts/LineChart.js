@@ -29,7 +29,7 @@ const LineChart = (props) => {
     });
 
     const leakageData = useSelector((state) => (state.resultset.filtered.length > 0) ? state.resultset.filtered : leakageTableData);
-    const filterDate = useSelector((state) => state.resultset.filterparam.startDate);
+    const filterDate = useSelector((state) => state.resultset.filterparam.endDate);
 
     useEffect(() => {
       console.log("today date is ", todayDate);
