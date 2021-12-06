@@ -63,7 +63,7 @@ const SelectChip = ({items = ['done', 'progress', 'fail']}) => {
     return(
         <div>
             <FormControl sx={{  width: '100%' }}>
-                <InputLabel id="demo-multiple-chip-label">Status</InputLabel>
+                <InputLabel id="demo-multiple-chip-label">Leakage Parameter</InputLabel>
                 <Select
                 labelId="demo-multiple-chip-label"
                 id="demo-multiple-chip"

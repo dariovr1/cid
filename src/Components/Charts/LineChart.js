@@ -19,7 +19,15 @@ import moment from 'moment';
 
 const LineChart = (props) => {
 
-    const [currdate, setCurrdate] = useState("");
+    const dataLegendgraph = [
+      { name: "Avg_Reject", symbol: { fill: "#e8d066", type: "square" } },
+      { name: "AvgRjct1", symbol: { fill: "#a38500", type: "square" } },
+      { name: "MaxFlt#1", symbol: { fill: "#000", type: "square" } },
+      { name: "MaxRjct1", symbol: { fill: "#8a3395", type: "square" } },
+      { name: "STDvR1", symbol: { fill: "#ec8fca", type: "square" } }
+    ];
+
+    const [todayDateResult,setTodayDate] = useState(todayDate);
 
     const statusList = useSelector((state) => {
       if (state.resultset.filterparam.status.length > 0 ) {
@@ -31,20 +39,6 @@ const LineChart = (props) => {
     const leakageData = useSelector((state) => (state.resultset.filtered.length > 0) ? state.resultset.filtered : leakageTableData);
     const filterDate = useSelector((state) => state.resultset.filterparam.endDate);
 
-    useEffect(() => {
-      console.log("today date is ", todayDate);
-      setCurrdate(todayDate);
-    },[]);
-
-    useEffect(() => {
-      console.log("LineChart as change ", statusList.includes("STDvR1"));
-    },[statusList]);
-
-    useEffect(() => {
-      (filterDate != "") && setCurrdate(moment(filterDate).format("MMM D, YYYY"));
-    },[filterDate]);
-
-
 
     return (    
       <>
@@ -53,7 +47,7 @@ const LineChart = (props) => {
         <Typography variant="h5" style={{padding: '20px'}}>LU44 Maker</Typography>
       </div>
       <div style={{padding: '20px', gap: '20px',  display: 'flex', flexDirection : 'row'}}>
-        <Typography variant="h6">Leakage Date - {todayDate}</Typography>
+        <Typography variant="h6">Leakage Date - {todayDate(filterDate)}</Typography>
         <FilterButton datafilter={leakageTableData} chips={["Avg_Reject","AvgRjct1","MaxFlt#1","MaxRjct1","STDvR1"]} />
       </div>
       <div style={{ backgroundColor : 'white' }}>
@@ -62,28 +56,22 @@ const LineChart = (props) => {
           <VictoryLegend x={0} y={10}
           orientation="horizontal"
           gutter={20}
-          data={[
-            { name: "Avg_reject", symbol: { fill: "#e8d066", type: "square" } },
-            { name: "AvgRjct1", symbol: { fill: "#a38500", type: "square" } },
-            { name: "MaxFix#1", symbol: { fill: "#000", type: "square" } },
-            { name: "STDvR1", symbol: { fill: "#8a3395", type: "square" } },
-            { name: "STDvR2", symbol: { fill: "#ec8fca", type: "square" } }
-          ]}
+          data={dataLegendgraph.filter(item => statusList.includes(item.name))}
         />
             <VictoryAxis dependentAxis tickValues={[9.8, 10.0,10.2,10.4,10.6,10.8]} />
             <VictoryAxis
-                  tickValues={getTickSet()}
+                  tickValues={getTickSet(filterDate)}
                   tickFormat={(x) => (x <= 12) ? x + " AM" : x + " PM" }
                 />
-                {statusList.includes("Avg_Reject") && <VictoryLine style={{data: {stroke: "#e8d066"}}} data={getBasicData()} />}
-                {statusList.includes("AvgRjct1") && <VictoryLine style={{data: { stroke: "#a38500" }}} data={getDatatwo()} />}
-                {statusList.includes("MaxFlt#1") && <VictoryLine style={{data: { stroke: "black" }}} data={getDatatre()} />}
-                {statusList.includes("STDvR1") && <VictoryLine style={{data: { stroke: "violet" }}} data={getDataquattro()} />}
+                {statusList.includes("Avg_Reject") && <VictoryLine style={{data: {stroke: "#e8d066"}}} data={getBasicData(filterDate)} />}
+                {statusList.includes("AvgRjct1") && <VictoryLine style={{data: { stroke: "#a38500" }}} data={getDatatwo(filterDate)} />}
+                {statusList.includes("MaxFlt#1") && <VictoryLine style={{data: { stroke: "black" }}} data={getDatatre(filterDate)} />}
+                {statusList.includes("STDvR1") && <VictoryLine style={{data: { stroke: "violet" }}} data={getDataquattro(filterDate)} />}
 
-                {statusList.includes("Avg_Reject") && <VictoryScatter style={{data: {fill: '#e8d066'}}} size={3}  data={getBasicData()} />}
-                {statusList.includes("MaxFlt#1") && <VictoryScatter style={{data: {fill: 'black'}}} size={3}  data={getDatatre()} />}
-                {statusList.includes("STDvR1") && <VictoryScatter style={{data: {fill: '#fd30f6'}}} size={3}  data={getDataquattro()} />}
-                {statusList.includes("AvgRjct1") && <VictoryScatter style={{data: { fill : "#a38500" }}} size={3} data={getDatatwo()} />}
+                {statusList.includes("Avg_Reject") && <VictoryScatter style={{data: {fill: '#e8d066'}}} size={3}  data={getBasicData(filterDate)} />}
+                {statusList.includes("MaxFlt#1") && <VictoryScatter style={{data: {fill: 'black'}}} size={3}  data={getDatatre(filterDate)} />}
+                {statusList.includes("STDvR1") && <VictoryScatter style={{data: {fill: '#fd30f6'}}} size={3}  data={getDataquattro(filterDate)} />}
+                {statusList.includes("AvgRjct1") && <VictoryScatter style={{data: { fill : "#a38500" }}} size={3} data={getDatatwo(filterDate)} />}
         </VictoryChart>
       </div>
     </>

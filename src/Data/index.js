@@ -1,9 +1,9 @@
 import moment from 'moment';
-
-
 const currentdate = parseInt(moment().format("HH"));
 
-const todayDate = moment().format("MMM D, YYYY").toString();
+const todayDate = (data) => {
+  return (data) ? moment(moment.unix(data)).format("MMM D, YYYY").toString() : moment().format("MMM D, YYYY").toString();
+};
 
 const leakageTableData = [{
   startDate : '17/11/2021 00:00:00',
@@ -293,26 +293,52 @@ const mockData = [
     {x: 22, y: 10.4}
   ];
 
-  const getBasicData = () => {
-    console.log("getBasciData ", basicData.filter(item => {
-      return currentdate >= item.x;
-    }));
-    return basicData.filter(item => currentdate >= item.x);
+  const getBasicData = (fil) => {
+    if(!fil) {
+      return basicData.filter(item => currentdate >= item.x);
+    }
+    return basicData.filter(item => fil >= item.x);
   }
 
-  const getDatatwo = () => {
-    return basicDatatwo.filter(item => currentdate >= item.x);
+  const getDatatwo = (fil) => {
+    if(!fil) {
+      return basicDatatwo.filter(item => currentdate >= item.x);
+    }
+    return basicDatatwo.filter(item => fil >= item.x);
   }
 
-  const getDatatre = () => {
-    return basicDatatre.filter(item => currentdate >= item.x);
+  const getDatatre = (fil) => {
+    if(!fil) {
+      return basicDatatre.filter(item => currentdate >= item.x);
+    }
+    return basicDatatre.filter(item => fil >= item.x);
   }
 
-  const getDataquattro = () => {
+  const getDataquattro = (fil) => {
+    if (!fil) {
     return basicDataquattro.filter(item => currentdate >= item.x);
+    }
+    return basicDataquattro.filter(item => fil >= item.x);
   }
 
-  const getTickSet = () => {
+  const getTickSet = (fil) => {
+
+    if (!fil) {
+      return tickset.filter(item => {
+        return currentdate >= item;
+      });
+    }
+
+    console.log("total format ", moment(moment.unix(fil)).hour());
+    fil = moment(moment.unix(fil)).hour();
+    console.log("fil is ", fil);
+
+    if (fil) {
+      return tickset.filter(item => {
+        return parseInt(fil) >= item;
+      });
+    }
+
     return tickset.filter(item => {
       return currentdate >= item;
     });
