@@ -276,7 +276,9 @@ const mockData = [
     {x: 22, y: 10.8}
   ];
 
-  const tickset = [0,2,4,6,8,10,12,2,4,6,8,10,12,14,16,18,20,22];
+  //const tickset = [0,2,4,6,8,10,12,2,4,6,8,10,12,14,16,18,20,22];
+
+  const tickset = [0,2,4,6,8,10,12,14,16,18,20,22];
 
   const basicDataquattro = [
     {x: 0, y: 10.5},
@@ -297,32 +299,32 @@ const mockData = [
     if(!fil) {
       return basicData.filter(item => currentdate >= item.x);
     }
-    return basicData.filter(item => fil >= item.x);
+    return basicData.filter(item => moment(moment.unix(fil)).hour() >= item.x);
   }
 
   const getDatatwo = (fil) => {
     if(!fil) {
       return basicDatatwo.filter(item => currentdate >= item.x);
     }
-    return basicDatatwo.filter(item => fil >= item.x);
+    console.log("fil is in getDataTwo ", moment(moment.unix(fil)).hour());
+    return basicDatatwo.filter(item => moment(moment.unix(fil)).hour() >= item.x);
   }
 
   const getDatatre = (fil, data = basicDatatre) => {
     if(!fil) {
       return data.filter(item => currentdate >= item.x);
     }
-    return data.filter(item => fil >= item.x);
+    return data.filter(item => moment(moment.unix(fil)).hour() >= item.x);
   }
 
   const getDataquattro = (fil) => {
     if (!fil) {
     return basicDataquattro.filter(item => currentdate >= item.x);
     }
-    return basicDataquattro.filter(item => fil >= item.x);
+    return basicDataquattro.filter(item => moment(moment.unix(fil)).hour() >= item.x);
   }
 
   const getTickSet = (fil) => {
-
     if (!fil) {
       return tickset.filter(item => {
         return currentdate >= item;
@@ -338,10 +340,6 @@ const mockData = [
         return parseInt(fil) >= item;
       });
     }
-
-    return tickset.filter(item => {
-      return currentdate >= item;
-    });
   }
 
 

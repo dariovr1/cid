@@ -3,6 +3,7 @@ import TextField from '@mui/material/TextField';
 import EditIcon from '@mui/icons-material/Edit';
 import TableUI from '../Components/TableUI';
 import SaveIcon from '@mui/icons-material/Save';
+import { Link } from "react-router-dom";
 
 const TableContainerContainer = (props) => {
 
@@ -66,7 +67,7 @@ const TableContainerContainer = (props) => {
                     </div>
                 </div>
                 <br/>
-         <h8 style={{color: '#004f90'}}>SHOW DETAILS</h8>
+         <h8 style={{color: '#004f90'}}><Link style={{textDecoration : "none"}} to="/details">SHOW DETAILS</Link></h8>
                 </div>
           <TableUI />
        </div>
