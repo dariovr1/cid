@@ -307,11 +307,11 @@ const mockData = [
     return basicDatatwo.filter(item => fil >= item.x);
   }
 
-  const getDatatre = (fil) => {
+  const getDatatre = (fil, data = basicDatatre) => {
     if(!fil) {
-      return basicDatatre.filter(item => currentdate >= item.x);
+      return data.filter(item => currentdate >= item.x);
     }
-    return basicDatatre.filter(item => fil >= item.x);
+    return data.filter(item => fil >= item.x);
   }
 
   const getDataquattro = (fil) => {

@@ -6,7 +6,7 @@ import Fade from '@mui/material/Fade';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import { setFilterDate, executeSearchFilter, clearFilter } from '../../Slice/SearchSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import SelectChip from '../Form/SelectChip';
 import DateTimePickerComponent from '../Form/DateTimePickerComponent';
 import SaveButton from "../Buttons/SaveButton";
@@ -16,19 +16,17 @@ import DatePickerModal from '../Modal/DatePickerModal';
 import {mockData} from '../../Data/index';
 
   
-const FilterButton = ({chips,datafilter}) => {
-
+const FilterButton = ({chips,datafilter,labelname,hidechips}) => {
     const dispatch = useDispatch();
-
     const handleChange = (key,value) => {
             console.log("handleChange Datapicker", {
                 key,
                 value
             });
-
             dispatch(setFilterDate({key,value}));
-
     }
+
+    const filterParam = useSelector((state) => state.resultset.filterparam);
 
 
     const handleClearClick = () => {
@@ -54,10 +52,10 @@ const FilterButton = ({chips,datafilter}) => {
                     <Fade {...TransitionProps} timeout={350}>
                         <Paper>
                             <div style={{padding: '20px'}}>
-                                <SelectChip items={chips} sx={{width: '100%'}} /> 
+                            {(!hidechips) && <SelectChip labelname={labelname} items={chips} sx={{width: '100%'}} /> }
                                     <div style={{display: 'flex', gap: "50px", marginTop: '20px',  flexWrap: 'wrap' }}>
-                                        <DatePickerModal label="Date From" filtername="startDate" handleChange={handleChange} />
-                                        <DatePickerModal label="Date To" filtername="endDate" handleChange={handleChange} />
+                                        <DatePickerModal label="Date From" filtername="startDate" value={filterParam.startDate} handleChange={handleChange} />
+                                        <DatePickerModal label="Date To" filtername="endDate" value={filterParam.endDate} handleChange={handleChange} />
                                     </div>
                                 <div style={{display: 'flex', marginTop: "30px", gap: '50px', justifyContent : 'flex-end'}}>
                                      <SaveButton handleClick={handleClick} />

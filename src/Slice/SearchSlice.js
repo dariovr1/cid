@@ -30,6 +30,8 @@ export const SearchSlice = createSlice({
       console.log("clearFilter execute");
       state.filtered = [];
       state.filterparam.status = [];
+      state.filterparam.startDate = null;
+      state.filterparam.endDate = null;
      return state;
     },
     setFilterDate: (state, action) => {

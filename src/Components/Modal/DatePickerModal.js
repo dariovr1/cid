@@ -11,7 +11,7 @@ import {
 
   const DatePickerModal = (props) => {
 
-    const [selectedDate, handleDateChange] = useState(null);
+    const [selectedDate, handleDateChange] = useState(props.value);
 
     const handleDatePickerHandle = (e) => {
             handleDateChange(e);
