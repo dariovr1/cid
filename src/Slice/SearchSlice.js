@@ -37,7 +37,9 @@ export const SearchSlice = createSlice({
     setFilterDate: (state, action) => {
       console.log("setFilterDate ", current(state));
      console.log("setFilterDate payload", action.payload);
-     state.filterparam[action.payload.key] = action.payload.value;
+     action.payload.forEach(item => {
+      state.filterparam[item.key] = item.value;
+     });
      return state;
     },
     executeSearchFilter : (state, {payload}) => {

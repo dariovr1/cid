@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import Popper from '@mui/material/Popper';
 import PopupState, { bindToggle, bindPopper } from 'material-ui-popup-state';
@@ -17,13 +17,28 @@ import {mockData} from '../../Data/index';
 
   
 const FilterButton = ({chips,datafilter,labelname,hidechips}) => {
+
     const dispatch = useDispatch();
+    const [addDate,setAddDate] = useState([]);
+
     const handleChange = (key,value) => {
             console.log("handleChange Datapicker", {
                 key,
                 value
             });
-            dispatch(setFilterDate({key,value}));
+
+        setAddDate(elem => {
+            return [
+                ...elem,
+                {
+                    key,
+                    value
+                }
+            ];
+        });
+        /*
+        dispatch(setFilterDate({key,value}));
+        */
     }
 
     const filterParam = useSelector((state) => state.resultset.filterparam);
@@ -34,8 +49,10 @@ const FilterButton = ({chips,datafilter,labelname,hidechips}) => {
     }
 
     const handleClick = () => {
+        console.log("addDate ", addDate);
         const res = (datafilter) ? datafilter : mockData;
         console.log("handleClick");
+        dispatch(setFilterDate(addDate));
         dispatch(executeSearchFilter(res));
     };
 
