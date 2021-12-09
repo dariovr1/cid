@@ -93,25 +93,25 @@ const TableComponent2 = ({rows,tablerow}) => {
   };
 
     return (
-    <TableContainer component={Paper} sx={{width: '60%', marginBottom: '50px'}}>
+    <TableContainer component={Paper} sx={{marginBottom: '50px'}}>
       <Table sx={{ width: '100%' }} aria-label="simple table">
         <TableHead>
           <TableRow>
           {tablerow.map(item => (
-            <TableCell style={{width: 200}}>{item}</TableCell>
+            <TableCell align="center" style={{width: 200}}>{item}</TableCell>
           ))}
           </TableRow>
         </TableHead>
         <TableBody>
           {renderRow.map((row) => (
             <TableRow>
-               <TableCell>{row.startDate}</TableCell>
-               <TableCell>{row.endDate}</TableCell>
-               <TableCell>{row.type}</TableCell>
-               <TableCell>{row.rownumber}</TableCell>
-               <TableCell>{row.severity}</TableCell>
-               <TableCell>{row.valveno}</TableCell>
-               <TableCell style={{backgroundColor: (row.alert == 1) && 'yellow' }}>{row.alert}</TableCell>
+               <TableCell align="center">{row.startDate}</TableCell>
+               <TableCell align="center">{row.endDate}</TableCell>
+               <TableCell align="center">{row.type}</TableCell>
+               <TableCell align="center">{row.rownumber}</TableCell>
+               <TableCell align="center">{row.severity}</TableCell>
+               <TableCell align="center">{row.valveno}</TableCell>
+               <TableCell align="center" style={{backgroundColor: (row.alert == 1) && '#ffa500' }}>{row.alert}</TableCell>
             </TableRow>
           ))}
         </TableBody>

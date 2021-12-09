@@ -48,9 +48,9 @@ const LineChart = (props) => {
       </div>
       <div style={{padding: '20px', gap: '20px',  display: 'flex', flexDirection : 'row'}}>
         <Typography variant="h6">Leakage Date - {todayDate(filterDate)}</Typography>
-        <FilterButton datafilter={leakageTableData} chips={["Avg_Reject","AvgRjct1","MaxFlt#1","MaxRjct1","STDvR1"]} />
+        <FilterButton labelname="Leakage Parameters" datafilter={leakageTableData} chips={["Avg_Reject","AvgRjct1","MaxFlt#1","MaxRjct1","STDvR1"]} />
       </div>
-      <div style={{ backgroundColor : 'white' }}>
+      <div style={{ backgroundColor : '#f8f8f8', padding: '20px' }}>
         <TableComponent  rows={leakageData} tablerow={['startDate','endDate','type', 'rownumber', 'severity', 'valveno', 'alert' ]} />
           <VictoryChart width={1120} height={400} theme={VictoryTheme.material} domainPadding={10}>
           <VictoryLegend x={0} y={10}

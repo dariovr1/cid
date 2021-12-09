@@ -19,6 +19,7 @@ import {mockData} from '../../Data/index';
 const FilterButton = ({chips,datafilter,labelname,hidechips}) => {
 
     const dispatch = useDispatch();
+    const inputRef = React.useRef(null);
     const [addDate,setAddDate] = useState([]);
 
     const handleChange = (key,value) => {
@@ -46,6 +47,7 @@ const FilterButton = ({chips,datafilter,labelname,hidechips}) => {
 
     const handleClearClick = () => {
         dispatch(clearFilter());
+        inputRef.current.click();
     }
 
     const handleClick = () => {
@@ -54,6 +56,7 @@ const FilterButton = ({chips,datafilter,labelname,hidechips}) => {
         console.log("handleClick");
         dispatch(setFilterDate(addDate));
         dispatch(executeSearchFilter(res));
+        inputRef.current.click();
     };
 
     return (
@@ -61,10 +64,10 @@ const FilterButton = ({chips,datafilter,labelname,hidechips}) => {
             <PopupState variant="popper" popupId="demo-popup-popper">
             {(popupState) => (
                 <div>
-                <Button style={{background: '#004f90'}} variant="contained" {...bindToggle(popupState)} startIcon={<FilterListIcon />}>
+                <Button ref={inputRef} style={{background: '#004f90'}} variant="contained" {...bindToggle(popupState)} startIcon={<FilterListIcon />}>
                     Filter
                 </Button>
-                <Popper {...bindPopper(popupState)} transition>
+                <Popper {...bindPopper(popupState)}  transition>
                     {({ TransitionProps }) => (
                     <Fade {...TransitionProps} timeout={350}>
                         <Paper>

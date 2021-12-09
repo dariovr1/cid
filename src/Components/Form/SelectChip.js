@@ -11,7 +11,7 @@ import Checkbox from '@mui/material/Checkbox';
 import ListItemText from '@mui/material/ListItemText';
 import CancelRoundedIcon from "@material-ui/icons/CancelRounded";
 import { useDispatch, useSelector } from 'react-redux';
-import {setStatus} from '../../Slice/SearchSlice';
+import {setStatus, removeStatus} from '../../Slice/SearchSlice';
 
 
 
@@ -29,36 +29,33 @@ const MenuProps = {
 const SelectChip = ({items = ['done', 'progress', 'fail'],labelname="status"}) => {
 
 
-      const theme = useTheme();
-      const dispatch = useDispatch();
-      const resultset = useSelector((state) => state.resultset );
-      const [personName, setPersonName] = React.useState([]);
+  const theme = useTheme();
+  const dispatch = useDispatch();
+  const resultset = useSelector((state) => state.resultset );
+  const [personName, setPersonName] = React.useState([]);
 
-      useEffect(() => {
-        resultset.filterparam.status != "" && setPersonName(resultset.filterparam.status);
-        resultset.filterparam.status.length == 0 && setPersonName([]);
-      },[resultset.filterparam.status]);
-    
-      const handleChange = (event) => {
-        const {
-          target: { value },
-        } = event;
-        dispatch(
-        setStatus(
-          // On autofill we get a the stringified value.
-          typeof value === 'string' ? value.split(',') : value,
-        ));
-      };
 
-    const  getStyles = (name, personName, theme) => {
-        return {
-          fontWeight:
-            personName.indexOf(name) === -1
-              ? theme.typography.fontWeightRegular
-              : theme.typography.fontWeightMedium,
-        };
-      };
-      
+  useEffect(() => {
+    resultset.filterparam.status != "" && setPersonName(resultset.filterparam.status);
+    resultset.filterparam.status.length == 0 && setPersonName([]);
+  },[resultset.filterparam.status]);
+
+  const handleChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    dispatch(
+    setStatus(
+      // On autofill we get a the stringified value.
+      typeof value === 'string' ? value.split(',') : value,
+    ));
+  };
+
+
+      const onDeleteChips = (value) => {
+        console.log("onDeleteChips ", value);
+        dispatch(removeStatus(value));
+      }
 
     return(
         <div>
@@ -74,7 +71,12 @@ const SelectChip = ({items = ['done', 'progress', 'fail'],labelname="status"}) =
                 renderValue={(selected) => (
                     <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
                     {selected.map((value) => (
-                        <Chip key={value} label={value} onDelete={() => {}} />
+                        <Chip key={value}  clickable
+                        deleteIcon={
+                          <CancelRoundedIcon
+                            onMouseDown={(event) => event.stopPropagation()}
+                          />
+                        } label={value} onDelete={() => onDeleteChips(value)} />
                     ))}
                     </Box>
                 )}

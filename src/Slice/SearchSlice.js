@@ -21,6 +21,10 @@ export const SearchSlice = createSlice({
       state.filterparam.status = action.payload;
       return state;
     },
+    removeStatus : (state, {payload}) => {
+      state.filterparam.status = state.filterparam.status.filter(item => item != payload);
+      return state;
+    },
     deleteItem : (state, action) => {
       console.log("deleteItem", current(state).default);
       state.default = current(state).default.filter(item => (item.id != action.payload));
@@ -78,6 +82,6 @@ export const SearchSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { setFilterDate,deleteItem,setStatus, executeSearchFilter, clearFilter } = SearchSlice.actions;
+export const { setFilterDate,deleteItem,setStatus, removeStatus, executeSearchFilter, clearFilter } = SearchSlice.actions;
 
 export default SearchSlice.reducer;
