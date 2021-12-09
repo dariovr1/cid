@@ -47,6 +47,7 @@ export const SearchSlice = createSlice({
      return state;
     },
     executeSearchFilter : (state, {payload}) => {
+      debugger;
       console.log("executeFilter ", current(state));
       const params = current(state).filterparam;
 

@@ -21,6 +21,7 @@ const FilterButton = ({chips,datafilter,labelname,hidechips}) => {
     const dispatch = useDispatch();
     const inputRef = React.useRef(null);
     const [addDate,setAddDate] = useState([]);
+    console.log("current data leaking data ", datafilter);
 
     const handleChange = (key,value) => {
             console.log("handleChange Datapicker", {
@@ -53,7 +54,7 @@ const FilterButton = ({chips,datafilter,labelname,hidechips}) => {
     const handleClick = () => {
         console.log("addDate ", addDate);
         const res = (datafilter) ? datafilter : mockData;
-        console.log("handleClick");
+        console.log("res is ", res);
         dispatch(setFilterDate(addDate));
         dispatch(executeSearchFilter(res));
         inputRef.current.click();
