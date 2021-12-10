@@ -8,7 +8,7 @@ const initialState = {
     status : [],
     startDate : null,
     endDate : null,
-    active : false
+    active : false,
   }
 };
 
@@ -36,6 +36,7 @@ export const SearchSlice = createSlice({
       state.filterparam.status = [];
       state.filterparam.startDate = null;
       state.filterparam.endDate = null;
+      state.filterparam.active = false;
      return state;
     },
     setFilterDate: (state, action) => {
@@ -50,6 +51,7 @@ export const SearchSlice = createSlice({
       debugger;
       console.log("executeFilter ", current(state));
       const params = current(state).filterparam;
+      state.filterparam.active = true;
 
       if (params.status.length > 0) {
         state.filtered = payload.filter((item) => {

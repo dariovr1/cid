@@ -28,6 +28,7 @@ const LineChart = (props) => {
     ];
 
     const [todayDateResult,setTodayDate] = useState(todayDate);
+    const [currData, setCurrData] = useState(leakageTableData);
 
     const statusList = useSelector((state) => {
       if (state.resultset.filterparam.status.length > 0 ) {
@@ -36,8 +37,16 @@ const LineChart = (props) => {
       return ["Avg_Reject","AvgRjct1","MaxFlt#1","MaxRjct1","STDvR1"];
     });
 
-    const leakageData = useSelector((state) => (state.resultset.filtered.length > 0) ? state.resultset.filtered : leakageTableData);
+    const filteredData = useSelector((state) => (state.resultset.filtered));
+    const isActive = useSelector((state) => (state.resultset.filterparam.active));
     const filterDate = useSelector((state) => state.resultset.filterparam.endDate);
+
+
+    useEffect(() => {
+      (isActive && filteredData.length > 0) && setCurrData(filteredData);
+      (isActive && filteredData.length == 0) && setCurrData("no data found");
+      (!isActive) && setCurrData(leakageTableData);
+    },[filteredData]);
 
 
     return (    
@@ -48,10 +57,12 @@ const LineChart = (props) => {
       </div>
       <div style={{padding: '20px', gap: '20px',  display: 'flex', flexDirection : 'row'}}>
         <Typography variant="h6">Leakage Data - {todayDate(filterDate)}</Typography>
-        <FilterButton labelname="Leakage Parameters" datafilter={leakageTableData} chips={["Avg_Reject","AvgRjct1","MaxFlt#1","MaxRjct1","STDvR1"]} />
+        <FilterButton labelname="Leakage Parameters" datafilter={currData} chips={["Avg_Reject","AvgRjct1","MaxFlt#1","MaxRjct1","STDvR1"]} />
       </div>
       <div style={{ backgroundColor : '#f8f8f8', padding: '20px' }}>
-        <TableComponent  rows={leakageData} tablerow={['startDate','endDate','type', 'rownumber', 'severity', 'valveno', 'alert' ]} />
+      {typeof currData != 'string' && (
+        <TableComponent  rows={currData} tablerow={['startDate','endDate','type', 'rownumber', 'severity', 'valveno', 'alert' ]} />
+          ) || "no data found for this filter"}
           <VictoryChart width={1120} height={400} theme={VictoryTheme.material} domainPadding={10}>
           <VictoryLegend x={0} y={10}
           orientation="horizontal"
