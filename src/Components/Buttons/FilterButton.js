@@ -63,11 +63,9 @@ const FilterButton = ({chips,datafilter,labelname,hidechips}) => {
         console.log("addDate ", addDate);
         setAddDate([]);
         setCurrChips([]);
-        const res = (datafilter) ? datafilter : mockData;
-        console.log("res is ", res);
         dispatch(setStatus(currchips));
         dispatch(setFilterDate(addDate));
-        dispatch(executeSearchFilter(res));
+        dispatch(executeSearchFilter(datafilter));
         inputRef.current.click();
     };
 
