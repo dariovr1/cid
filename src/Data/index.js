@@ -5,6 +5,11 @@ const todayDate = (data) => {
   return (data) ? moment(moment.unix(data)).format("MMM D, YYYY").toString() : moment().format("MMM D, YYYY").toString();
 };
 
+const statusobj = {
+  index : ["done","progress", "fail"],
+  leaking : []
+}
+
 const leakageTableData = [{
   startDate : '01/12/2021 00:00:00',
   endDate : '01/12/2021 18:00:00',
@@ -318,6 +323,7 @@ const mockData = [
       getDataquattro,
       getTickSet,
       todayDate,
+      statusobj,
       leakageTableData
   }
 

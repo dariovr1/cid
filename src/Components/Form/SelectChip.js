@@ -26,36 +26,12 @@ const MenuProps = {
   },
 };
 
-const SelectChip = ({items = ['done', 'progress', 'fail'],labelname="status"}) => {
+const SelectChip = ({currchips,items,labelname,handleChangeChip,onDeleteChips}) => {
 
 
   const theme = useTheme();
   const dispatch = useDispatch();
   const resultset = useSelector((state) => state.resultset );
-  const [personName, setPersonName] = React.useState([]);
-
-
-  useEffect(() => {
-    resultset.filterparam.status != "" && setPersonName(resultset.filterparam.status);
-    resultset.filterparam.status.length == 0 && setPersonName([]);
-  },[resultset.filterparam.status]);
-
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    dispatch(
-    setStatus(
-      // On autofill we get a the stringified value.
-      typeof value === 'string' ? value.split(',') : value,
-    ));
-  };
-
-
-      const onDeleteChips = (value) => {
-        console.log("onDeleteChips ", value);
-        dispatch(removeStatus(value));
-      }
 
     return(
         <div>
@@ -65,8 +41,8 @@ const SelectChip = ({items = ['done', 'progress', 'fail'],labelname="status"}) =
                 labelId="demo-multiple-chip-label"
                 id="demo-multiple-chip"
                 multiple
-                value={personName}
-                onChange={handleChange}
+                value={currchips}
+                onChange={handleChangeChip}
                 input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
                 renderValue={(selected) => (
                     <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
@@ -84,7 +60,7 @@ const SelectChip = ({items = ['done', 'progress', 'fail'],labelname="status"}) =
                 >
                 {items.map((name) => (
                     <MenuItem key={name} value={name}>
-                        <Checkbox checked={personName.indexOf(name) > -1} />
+                        <Checkbox checked={currchips.indexOf(name) > -1} />
                         <ListItemText primary={name} />
                     </MenuItem>
                 ))}

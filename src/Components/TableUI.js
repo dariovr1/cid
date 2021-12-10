@@ -6,6 +6,7 @@ import {
 } from '../Selectors/Index';
 import LeakingData from './Buttons/LeakingData';
 import FilterButton from './Buttons/FilterButton';
+import { mockData, statusobj } from '../Data';
 
 const TableUI = () => {
 
@@ -20,7 +21,7 @@ const TableUI = () => {
         <div style={{display: 'flex', flexDirection: 'column'}}>
           <div style={{display: 'flex', marginBottom: '20px', justifyContent : 'space-between'}}>
             <LeakingData />
-            <FilterButton />
+            <FilterButton datafilter={mockData} labelname="status" chips={statusobj.index} />
           </div>
           <TableComponent rows={rows} />
         </div>

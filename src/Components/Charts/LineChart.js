@@ -47,7 +47,7 @@ const LineChart = (props) => {
         <Typography variant="h5" style={{padding: '20px'}}>LU44 Maker</Typography>
       </div>
       <div style={{padding: '20px', gap: '20px',  display: 'flex', flexDirection : 'row'}}>
-        <Typography variant="h6">Leakage Date - {todayDate(filterDate)}</Typography>
+        <Typography variant="h6">Leakage Data - {todayDate(filterDate)}</Typography>
         <FilterButton labelname="Leakage Parameters" datafilter={leakageTableData} chips={["Avg_Reject","AvgRjct1","MaxFlt#1","MaxRjct1","STDvR1"]} />
       </div>
       <div style={{ backgroundColor : '#f8f8f8', padding: '20px' }}>

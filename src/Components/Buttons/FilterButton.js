@@ -5,7 +5,7 @@ import PopupState, { bindToggle, bindPopper } from 'material-ui-popup-state';
 import Fade from '@mui/material/Fade';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
-import { setFilterDate, executeSearchFilter, clearFilter } from '../../Slice/SearchSlice';
+import { setFilterDate, executeSearchFilter, setStatus, clearFilter } from '../../Slice/SearchSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import SelectChip from '../Form/SelectChip';
 import DateTimePickerComponent from '../Form/DateTimePickerComponent';
@@ -21,7 +21,17 @@ const FilterButton = ({chips,datafilter,labelname,hidechips}) => {
     const dispatch = useDispatch();
     const inputRef = React.useRef(null);
     const [addDate,setAddDate] = useState([]);
-    console.log("current data leaking data ", datafilter);
+    const [currchips, setCurrChips] = useState([]);
+
+        const handleChangeChip = (datachip) => {
+            setCurrChips(datachip.target.value.map(item => item));
+        };
+
+        const onDeleteChips = (value) => {
+                console.log("onDeleteChips ", value);
+                setCurrChips(currchips.filter(item => item != value));
+        }
+
 
     const handleChange = (key,value) => {
             console.log("handleChange Datapicker", {
@@ -29,22 +39,20 @@ const FilterButton = ({chips,datafilter,labelname,hidechips}) => {
                 value
             });
 
-        setAddDate(elem => {
-            return [
-                ...elem,
-                {
-                    key,
-                    value
-                }
-            ];
-        });
-        /*
-        dispatch(setFilterDate({key,value}));
-        */
+        setAddDate(elem => [...elem,{key,value}]);
     }
 
     const filterParam = useSelector((state) => state.resultset.filterparam);
 
+    const getClockValue = (key) => addDate.find(item => item.key == key);
+    
+    const handleStatus = (val) => {
+        console.log("handle status ", val);
+    }
+
+    const handleRemoveStatus = (val) => {
+        console.log("handle remove status ", val);
+    }
 
     const handleClearClick = () => {
         dispatch(clearFilter());
@@ -53,8 +61,11 @@ const FilterButton = ({chips,datafilter,labelname,hidechips}) => {
 
     const handleClick = () => {
         console.log("addDate ", addDate);
+        setAddDate([]);
+        setCurrChips([]);
         const res = (datafilter) ? datafilter : mockData;
         console.log("res is ", res);
+        dispatch(setStatus(currchips));
         dispatch(setFilterDate(addDate));
         dispatch(executeSearchFilter(res));
         inputRef.current.click();
@@ -73,10 +84,10 @@ const FilterButton = ({chips,datafilter,labelname,hidechips}) => {
                     <Fade {...TransitionProps} timeout={350}>
                         <Paper>
                             <div style={{padding: '20px'}}>
-                            {(!hidechips) && <SelectChip labelname={labelname} items={chips} sx={{width: '100%'}} /> }
+                            {(!hidechips) && <SelectChip currchips={currchips} handleChangeChip={handleChangeChip} onDeleteChips={onDeleteChips} labelname={labelname} items={chips} sx={{width: '100%'}} /> }
                                     <div style={{display: 'flex', gap: "50px", marginTop: '20px',  flexWrap: 'wrap' }}>
-                                        <DatePickerModal label="Date From" filtername="startDate" value={filterParam.startDate} handleChange={handleChange} />
-                                        <DatePickerModal label="Date To" filtername="endDate" value={filterParam.endDate} handleChange={handleChange} />
+                                        <DatePickerModal label="Date From" filtername="startDate" value={getClockValue("startDate") && getClockValue("startDate") || null } handleChange={handleChange} />
+                                        <DatePickerModal label="Date To" filtername="endDate" value={getClockValue("endDate") && getClockValue("endDate") || null} handleChange={handleChange} />
                                     </div>
                                 <div style={{display: 'flex', marginTop: "30px", gap: '50px', justifyContent : 'flex-end'}}>
                                      <SaveButton handleClick={handleClick} />
