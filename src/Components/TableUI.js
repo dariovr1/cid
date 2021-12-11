@@ -7,6 +7,7 @@ import {
 import LeakingData from './Buttons/LeakingData';
 import FilterButton from './Buttons/FilterButton';
 import { mockData, statusobj } from '../Data';
+import { width } from '@mui/system';
 
 const TableUI = () => {
 
@@ -14,6 +15,9 @@ const TableUI = () => {
     (state.resultset.filtered.length > 0) ? state.resultset.filtered 
     : state.resultset.default ,'progress')));
   const dispatch = useDispatch();
+
+  const resultset = useSelector((state) =>  state.resultset);
+
 
 
   return (
@@ -23,7 +27,7 @@ const TableUI = () => {
             <LeakingData />
             <FilterButton datafilter={mockData} labelname="status" chips={statusobj.index} />
           </div>
-          <TableComponent rows={rows} />
+          {(resultset.filterparam.active && resultset.filtered.length == 0) && (<div style={{width : '1000px'}}>no data found</div>) || <TableComponent rows={rows} />}
         </div>
     </Fragment>
   );

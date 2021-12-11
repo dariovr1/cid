@@ -10,8 +10,8 @@ import {
 
 
   const DatePickerModal = (props) => {
-
     const [selectedDate, handleDateChange] = useState(props.value);
+    console.log("datapickermodel ", props.value);
 
     const handleDatePickerHandle = (e) => {
             handleDateChange(e);

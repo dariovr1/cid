@@ -5,6 +5,13 @@ const todayDate = (data) => {
   return (data) ? moment(moment.unix(data)).format("MMM D, YYYY").toString() : moment().format("MMM D, YYYY").toString();
 };
 
+const defaultHandleData = (data) => {
+  if(!data) {
+    return null;
+  }
+  return new moment(parseInt(data) * 1000).format('MM-DD-YYYY HH:mm');
+}
+
 const statusobj = {
   index : ["done","progress", "fail"],
   leaking : []
@@ -252,6 +259,21 @@ const mockData = [
 
   const tickset = [0,2,4,6,8,10,12,14,16,18,20,22];
 
+  const tickFormat = {
+    0 : "12PM",
+    2 : "2AM",
+    4 : "4AM",
+    6 : "6AM",
+    8 : "8AM",
+    10 : "10AM",
+    12 : "12AM",
+    14 : "2PM",
+    16 : "4PM",
+    18 : "6PM",
+    20 : "8PM",
+    22 : "10PM",
+  }
+
   const basicDataquattro = [
     {x: 0, y: 10.5},
     {x: 2, y: 10.5},
@@ -324,6 +346,8 @@ const mockData = [
       getTickSet,
       todayDate,
       statusobj,
+      tickFormat,
+      defaultHandleData,
       leakageTableData
   }
 

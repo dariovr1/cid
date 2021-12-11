@@ -7,7 +7,8 @@ import  { getBasicData,
   getDataquattro, 
   getTickSet,
   todayDate,
-  leakageTableData
+  leakageTableData,
+  tickFormat
 } from '../../Data/index';
 import FilterButton from '../Buttons/FilterButton';
 import Header from '../Header';
@@ -72,7 +73,7 @@ const LineChart = (props) => {
             <VictoryAxis dependentAxis tickValues={[9.8, 10.0,10.2,10.4,10.6,10.8]} />
             <VictoryAxis
                   tickValues={getTickSet(filterDate)}
-                  tickFormat={(x) => (x <= 12) ? x + " AM" : x + " PM" }
+                  tickFormat={(x) => tickFormat[x] }
                 />
                 {statusList.includes("Avg_Reject") && <VictoryLine style={{data: {stroke: "#e8d066"}}} data={getBasicData(filterDate)} />}
                 {statusList.includes("AvgRjct1") && <VictoryLine style={{data: { stroke: "#a38500" }}} data={getDatatwo(filterDate)} />}

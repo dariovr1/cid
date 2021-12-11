@@ -13,7 +13,8 @@ import SaveButton from "../Buttons/SaveButton";
 import ClearButton from "../Buttons/ClearButton";
 import FilterListIcon from '@mui/icons-material/FilterList';
 import DatePickerModal from '../Modal/DatePickerModal';
-import {mockData} from '../../Data/index';
+import {mockData, defaultHandleData} from '../../Data/index';
+import moment from 'moment';
 
   
 const FilterButton = ({chips,datafilter,labelname,hidechips}) => {
@@ -42,27 +43,31 @@ const FilterButton = ({chips,datafilter,labelname,hidechips}) => {
         setAddDate(elem => [...elem,{key,value}]);
     }
 
-    const filterParam = useSelector((state) => state.resultset.filterparam);
+    const stateStartDate = useSelector((state) =>  defaultHandleData(state.resultset.filterparam.startDate));
+    const stateEndDate = useSelector((state) =>  defaultHandleData(state.resultset.filterparam.endDate));
+
+    /*
+    useEffect(() => {
+       (dateParam.startDate && dateParam.endDate) && setAddDate(Object.entries(dateParam).map(item => {
+            return {
+              key : item[0],
+              value : new moment(item[1]).format('MM-DD-YYYY HH:mm')
+            }
+       }))
+
+    },[dateParam]);
+    */
 
     const getClockValue = (key) => addDate.find(item => item.key == key);
     
-    const handleStatus = (val) => {
-        console.log("handle status ", val);
-    }
-
-    const handleRemoveStatus = (val) => {
-        console.log("handle remove status ", val);
-    }
-
     const handleClearClick = () => {
         dispatch(clearFilter());
+        setCurrChips([]);
         inputRef.current.click();
     }
 
     const handleClick = () => {
-        console.log("addDate ", addDate);
         setAddDate([]);
-        setCurrChips([]);
         dispatch(setStatus(currchips));
         dispatch(setFilterDate(addDate));
         dispatch(executeSearchFilter(datafilter));
@@ -84,8 +89,8 @@ const FilterButton = ({chips,datafilter,labelname,hidechips}) => {
                             <div style={{padding: '20px'}}>
                             {(!hidechips) && <SelectChip currchips={currchips} handleChangeChip={handleChangeChip} onDeleteChips={onDeleteChips} labelname={labelname} items={chips} sx={{width: '100%'}} /> }
                                     <div style={{display: 'flex', gap: "50px", marginTop: '20px',  flexWrap: 'wrap' }}>
-                                        <DatePickerModal label="Date From" filtername="startDate" value={getClockValue("startDate") && getClockValue("startDate") || null } handleChange={handleChange} />
-                                        <DatePickerModal label="Date To" filtername="endDate" value={getClockValue("endDate") && getClockValue("endDate") || null} handleChange={handleChange} />
+                                        <DatePickerModal label="Date From" filtername="startDate" value={getClockValue("startDate") && getClockValue("startDate") || stateStartDate } handleChange={handleChange} />
+                                        <DatePickerModal label="Date To" filtername="endDate" value={getClockValue("endDate") && getClockValue("endDate") || stateEndDate } handleChange={handleChange} />
                                     </div>
                                 <div style={{display: 'flex', marginTop: "30px", gap: '50px', justifyContent : 'flex-end'}}>
                                      <SaveButton handleClick={handleClick} />
